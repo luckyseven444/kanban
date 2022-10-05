@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\KanbanController;
+use App\Http\Controllers\TodoController;
+use App\Models\Kanban;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource('kanbans', KanbanController::class);
+Route::post('todo-to-inprogress/{kanban}', [TodoController::class, 'todoToInprogress'])->name('todoToInprogress');
+Route::post('todo-to-done/{kanban}', [TodoController::class, 'todoToDone'])->name('todoToDone');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
